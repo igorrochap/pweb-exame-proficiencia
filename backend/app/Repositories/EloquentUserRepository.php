@@ -11,4 +11,9 @@ class EloquentUserRepository implements UserRepository
     {
         return User::query()->create($attributes);
     }
+
+    public function findByEmail(string $email): ?User
+    {
+        return User::query()->where('email', $email)->first();
+    }
 }

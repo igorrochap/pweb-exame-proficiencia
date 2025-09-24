@@ -10,8 +10,7 @@ readonly class CreateUserDTO
         private string $name,
         private string $email,
         private string $password,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(CreateUserRequest $request): CreateUserDTO
     {

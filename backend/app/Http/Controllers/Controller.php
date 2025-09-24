@@ -25,6 +25,6 @@ abstract class Controller
 
     protected function error(string $message): JsonResponse
     {
-        return response()->json(["message" => $message], Response::HTTP_INTERNAL_SERVER_ERROR);
+        return response()->json(['message' => $message], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

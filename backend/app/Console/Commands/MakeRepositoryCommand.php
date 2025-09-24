@@ -41,12 +41,12 @@ class MakeRepositoryCommand extends Command
         $pathInterface = app_path("Contracts/Repositories/{$fullName}.php");
         $namespace = is_null($this->namespace) ? '' : "\\{$this->namespace}";
         $this->generateByStub(base_path('stubs/repository/interface.stub'), $pathInterface, [
-            '{{ namespace }}' => $this->namespaces['interface'] . $namespace,
+            '{{ namespace }}' => $this->namespaces['interface'].$namespace,
             '{{ interface }}' => $this->repositoryName,
         ]);
         $this->comment("{$fullName} created");
 
-        return (object) ['nome' => $this->repositoryName, 'namespace' => $this->namespaces['interface'] . $namespace];
+        return (object) ['nome' => $this->repositoryName, 'namespace' => $this->namespaces['interface'].$namespace];
     }
 
     private function createImplementation(): object
@@ -56,14 +56,14 @@ class MakeRepositoryCommand extends Command
         $pathImplementation = app_path("Repositories/{$fullName}.php");
         $namespace = is_null($this->namespace) ? '' : "\\{$this->namespace}";
         $this->generateByStub(base_path('stubs/repository/implementation.stub'), $pathImplementation, [
-            '{{ namespace }}' => $this->namespaces['concrete'] . $namespace,
+            '{{ namespace }}' => $this->namespaces['concrete'].$namespace,
             '{{ class }}' => "Eloquent{$this->repositoryName}",
-            '{{ interfaceNamespace }}' => $this->namespaces['interface'] . $namespace,
+            '{{ interfaceNamespace }}' => $this->namespaces['interface'].$namespace,
             '{{ interface }}' => $this->repositoryName,
         ]);
         $this->comment("{$fullName} created");
 
-        return (object) ['nome' => $concreteName, 'namespace' => $this->namespaces['concrete'] . $namespace];
+        return (object) ['nome' => $concreteName, 'namespace' => $this->namespaces['concrete'].$namespace];
     }
 
     private function registerBinding(object $interface, object $implementacao): void
