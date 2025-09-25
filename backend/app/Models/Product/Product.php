@@ -20,8 +20,8 @@ class Product extends Model
     protected static function boot(): void
     {
         parent::boot();
-        static::creating(function ($user) {
-            $user->uuid = UUID::create()->get();
+        static::creating(function (Product $product) {
+            $product->uuid = UUID::create()->get();
         });
     }
 

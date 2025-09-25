@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\UuidCast;
+use App\ValueObjects\UUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -44,5 +45,13 @@ class User extends Authenticatable
             'uuid' => UuidCast::class,
             'password' => 'hashed',
         ];
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::creating(static function (User $user) {
+           $user->uuid = UUID::create()->get();
+        });
     }
 }
