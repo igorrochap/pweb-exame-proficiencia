@@ -3,12 +3,11 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\TokenDoesntExistsException;
+use App\Support\JwtWrapper;
 use App\Validations\ApiToken\ExpiredToken;
 use App\Validations\ApiToken\InvalidToken;
 use App\Validations\ApiToken\TokenNotExists;
 use Closure;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,7 +22,7 @@ class ApiAuthentication
     {
         try {
             $token = $this->getToken($request);
-            $payload = JWT::decode($token, new Key(config('jwt.key'), 'HS256'));
+            $payload = JwtWrapper::decode($token);
             return $next($request);
         } catch (\Exception $exception) {
             $validationChain = new TokenNotExists();

@@ -4,8 +4,8 @@ namespace App\Actions\Auth;
 
 use App\Contracts\Repositories\UserRepository;
 use App\DTO\Auth\TokenDTO;
-use App\Models\User;
-use Firebase\JWT\JWT;
+use App\Models\User;;
+use App\Support\JwtWrapper;
 use Illuminate\Support\Facades\Hash;
 
 readonly class Authenticate
@@ -33,8 +33,11 @@ readonly class Authenticate
     {
         $issuedAt = time();
         $expiration = $issuedAt + (60 * 60);
-        $payload = ['iat' => $issuedAt, 'exp' => $expiration, 'sub' => $user->uuid];
-        $token = JWT::encode($payload, config('jwt.key'), 'HS256');
+        $payload = ['iat' => $issuedAt, 'exp' => $expiration, 'sub' => [
+            'uuid' => $user->uuid,
+            'id' => $user->id,
+        ]];
+        $token = JwtWrapper::encode($payload);
 
         return new TokenDTO($token, $issuedAt, $expiration);
     }
