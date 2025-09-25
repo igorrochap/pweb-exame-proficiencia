@@ -4,7 +4,7 @@ namespace App\Actions\Auth;
 
 use App\Contracts\Repositories\UserRepository;
 use App\DTO\Auth\TokenDTO;
-use App\Models\User;;
+use App\Models\User;
 use App\Support\JwtWrapper;
 use Illuminate\Support\Facades\Hash;
 

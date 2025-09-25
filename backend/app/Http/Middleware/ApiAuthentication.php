@@ -23,10 +23,12 @@ class ApiAuthentication
         try {
             $token = $this->getToken($request);
             $payload = JwtWrapper::decode($token);
+
             return $next($request);
         } catch (\Exception $exception) {
-            $validationChain = new TokenNotExists();
-            $validationChain->add(new InvalidToken())->add(new ExpiredToken());
+            $validationChain = new TokenNotExists;
+            $validationChain->add(new InvalidToken)->add(new ExpiredToken);
+
             return $validationChain->handle($exception);
         }
     }
@@ -38,8 +40,9 @@ class ApiAuthentication
     {
         $token = $request->cookie('token');
         if (is_null($token)) {
-            throw new TokenDoesntExistsException();
+            throw new TokenDoesntExistsException;
         }
+
         return $token;
     }
 }

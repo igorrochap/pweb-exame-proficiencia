@@ -16,7 +16,6 @@ class Product extends Model
         'quantity',
     ];
 
-
     protected static function boot(): void
     {
         parent::boot();

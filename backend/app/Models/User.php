@@ -51,7 +51,7 @@ class User extends Authenticatable
     {
         parent::boot();
         static::creating(static function (User $user) {
-           $user->uuid = UUID::create()->get();
+            $user->uuid = UUID::create()->get();
         });
     }
 }

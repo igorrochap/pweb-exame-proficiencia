@@ -11,6 +11,7 @@ abstract class TokenValidation implements TokenValidationContract
     public function add(TokenValidationContract $validation): TokenValidationContract
     {
         $this->next = $validation;
+
         return $validation;
     }
 
@@ -19,6 +20,7 @@ abstract class TokenValidation implements TokenValidationContract
         if (isset($this->next)) {
             return $this->next->handle($exception);
         }
+
         return null;
     }
 }

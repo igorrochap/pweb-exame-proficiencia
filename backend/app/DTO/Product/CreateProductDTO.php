@@ -13,8 +13,7 @@ readonly class CreateProductDTO
         public int $price,
         public int $quantity,
         public array $categories,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(CreateProductRequest $request): CreateProductDTO
     {
