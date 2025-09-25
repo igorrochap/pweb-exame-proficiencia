@@ -23,6 +23,11 @@ abstract class Controller
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 
+    public function notFound(string $message): JsonResponse
+    {
+        return response()->json(['message' => $message], Response::HTTP_NOT_FOUND);
+    }
+
     protected function error(string $message): JsonResponse
     {
         return response()->json(['message' => $message], Response::HTTP_INTERNAL_SERVER_ERROR);

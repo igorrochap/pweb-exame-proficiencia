@@ -29,4 +29,14 @@ class ProductController extends Controller
 
         return $this->success($products);
     }
+
+    public function show(string $uuid, Request $request): JsonResponse
+    {
+        $userID = JwtWrapper::getUserID($request->cookie('token'));
+        $product = $this->repository->findByUUID($uuid, $userID);
+        if (is_null($product)) {
+            return $this->notFound('Product not found');
+        }
+        return $this->success($product->makeHidden('id'));
+    }
 }
