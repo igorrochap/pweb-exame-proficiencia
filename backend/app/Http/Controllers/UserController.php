@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class UserController extends Controller
 {
     public function __construct(
-        private UserRepository $repository,
+        private readonly UserRepository $repository,
     ) {
     }
 
