@@ -4,6 +4,7 @@ namespace App\Repositories\Product;
 
 use App\Contracts\Repositories\Product\ProductRepository;
 use App\DTO\Product\CreateProductDTO;
+use App\DTO\Product\UpdateProductDTO;
 use App\Models\Product\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -38,5 +39,14 @@ class EloquentProductRepository implements ProductRepository
             ->where('uuid', $uuid)
             ->where('user_id', $userID)
             ->first();
+    }
+
+    public function updateFromDTO(Product $product, UpdateProductDTO $dto): Product
+    {
+        $product->update($dto->toArray());
+        $product->categories()->sync($dto->categories);
+        $product->refresh();
+
+        return $product;
     }
 }
