@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Product;
 
 use App\Contracts\Repositories\CategoryRepository;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller

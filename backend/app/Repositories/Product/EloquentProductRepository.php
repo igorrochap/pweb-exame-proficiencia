@@ -49,4 +49,9 @@ class EloquentProductRepository implements ProductRepository
 
         return $product;
     }
+
+    public function updateQuantity(Product $product, int $quantity): void
+    {
+        $product->update(['quantity' => $quantity]);
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiAuthentication;
 use Illuminate\Support\Facades\Route;

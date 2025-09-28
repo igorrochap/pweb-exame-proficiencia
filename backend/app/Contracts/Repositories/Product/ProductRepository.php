@@ -17,4 +17,6 @@ interface ProductRepository
     public function findByUUID(string $uuid, int $userID): ?Product;
 
     public function updateFromDTO(Product $product, UpdateProductDTO $dto): Product;
+
+    public function updateQuantity(Product $product, int $quantity): void;
 }

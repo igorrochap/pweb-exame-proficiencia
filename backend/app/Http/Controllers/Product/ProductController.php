@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Product;
 
 use App\Contracts\Repositories\Product\ProductRepository;
 use App\DTO\Product\CreateProductDTO;
 use App\DTO\Product\UpdateProductDTO;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Support\JwtWrapper;
