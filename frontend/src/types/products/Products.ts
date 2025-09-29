@@ -17,3 +17,9 @@ export type ProductInput = {
     quantity: number;
     categories: Array<number>;
 }
+
+export type MovementInput = {
+    type: 'in' | 'out';
+    quantity: number;
+    product_id: string;
+}

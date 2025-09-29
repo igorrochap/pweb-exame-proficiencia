@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MovementDialog from '@/components/products/MovementDialog.vue';
 import ParentCard from '@/components/shared/ParentCard.vue';
 import productService from '@/services/products/product.service';
 import type { PaginatedProducts } from '@/types/products/Products';
@@ -65,6 +66,7 @@ function formatPrice(price: number): string {
                             <th class="text-center">Nome</th>
                             <th class="text-center">Preço</th>
                             <th class="text-center">Em estoque</th>
+                            <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,6 +74,25 @@ function formatPrice(price: number): string {
                             <td class="text-center">{{ product.name }}</td>
                             <td class="text-center">{{ formatPrice(product.price) }}</td>
                             <td class="text-center">{{ product.quantity }}</td>
+                            <td class="text-center">
+                                <v-menu location="bottom">
+                                    <template v-slot:activator="{ props }">
+                                        <v-btn variant="outlined" icon color="primary" v-bind="props">
+                                            <v-icon icon="mdi-dots-vertical" />
+                                        </v-btn>
+                                    </template>
+                                    <v-list>
+                                        <v-list-item>
+                                            <v-list-item-title>
+                                                <MovementDialog type="in" :product_id="product.uuid"/>
+                                            </v-list-item-title>
+                                            <v-list-item-title>
+                                                <MovementDialog type="out" :product_id="product.uuid"/>
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-menu>
+                            </td>
                         </tr>
                     </tbody>
                 </v-table>

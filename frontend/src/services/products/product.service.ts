@@ -1,4 +1,4 @@
-import type { PaginatedProducts, Product, ProductInput } from "@/types/products/Products";
+import type { MovementInput, PaginatedProducts, Product, ProductInput } from "@/types/products/Products";
 import http from "../http";
 
 export default {
@@ -10,6 +10,11 @@ export default {
 
     async create(product: ProductInput): Promise<Product> {
         const { data } = await http.post<Product>(`/products`, product);
+        return data;
+    },
+
+    async createMovement(movement: MovementInput): Promise<Response> {
+        const { data } = await http.post(`/products/${movement.product_id}/movement`, movement);
         return data;
     }
 }
