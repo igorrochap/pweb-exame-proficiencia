@@ -8,8 +8,19 @@ export const useUserStore = defineStore('user', {
     }),
 
     actions: {
-        async login(payload: Credentials) {
+        async login(payload: Credentials): Promise<void> {
             await authService.login(payload);
+        },
+
+        async logout() {
+
+        },
+
+        async fetchUser() {
+            if (!this.user) {
+                this.user = await authService.fetchLoggedUser();
+            }
+            return this.user;
         }
     }
 });

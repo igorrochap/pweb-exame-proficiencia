@@ -7,4 +7,10 @@ const http = axios.create({
     withCredentials: true,
 });
 
+http.interceptors.response.use(
+  (response: any) => response,
+  (error: any) =>
+    Promise.reject((error.response && error.response.data) || "Wrong Services")
+);
+
 export default http;
