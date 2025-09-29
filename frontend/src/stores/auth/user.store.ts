@@ -12,8 +12,8 @@ export const useUserStore = defineStore('user', {
             await authService.login(payload);
         },
 
-        async logout() {
-
+        async logout(): Promise<void> {
+            await authService.logout();
         },
 
         async fetchUser() {

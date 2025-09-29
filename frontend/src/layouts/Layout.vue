@@ -32,7 +32,7 @@ function logout() {
         </template>
         <v-list>
           <v-list-item>
-            <v-list-item-title>{{ userStore.user.name }}</v-list-item-title>
+            <v-list-item-title class="user-name">{{ userStore.user.name }}</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
           <v-list-item @click="logout">
@@ -54,6 +54,10 @@ function logout() {
 <style scoped>
 .v-btn.v-btn--active {
   background-color: rgba(255, 255, 255, 0.15);
+}
+
+.user-name {
+  text-transform: capitalize;
 }
 </style>
 

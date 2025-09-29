@@ -9,5 +9,9 @@ export default {
     async fetchLoggedUser(): Promise<Response> {
         const { data } = await http.get('/auth/me');
         return data;
+    },
+
+    async logout(): Promise<void> { 
+        await http.post('/logout');
     }
 }
