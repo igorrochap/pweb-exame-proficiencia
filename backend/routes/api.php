@@ -11,6 +11,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware(ApiAuthentication::class)->group(function () {
     Route::get('categories', [CategoryController::class, 'index']);
+    Route::post('logout', [AuthController::class, 'logout']);
     Route::prefix('auth')->controller(AuthController::class)->group(function () {
         Route::get('/me', 'user');
     });

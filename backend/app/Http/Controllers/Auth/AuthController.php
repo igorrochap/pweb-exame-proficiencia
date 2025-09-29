@@ -38,4 +38,17 @@ class AuthController extends Controller
         $loggedUser = $userRepository->findByID($userID);
         return $this->success($loggedUser);
     }
+
+    public function logout(): JsonResponse
+    {
+        return $this->success('Logged out')->cookie(
+            'token',
+            null,
+            -1,
+            '/',
+            null,
+            false,
+            true
+        );
+    }
 }
