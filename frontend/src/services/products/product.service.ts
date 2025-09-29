@@ -26,5 +26,9 @@ export default {
     async update(id: string, product: ProductInput): Promise<Product> {
         const { data } = await http.put<Product>(`/products/${id}`, product);
         return data;
+    },
+
+    async delete(productId: string): Promise<void> {
+        await http.delete(`/products/${productId}`);
     }
 }

@@ -24,6 +24,18 @@ export const useAlertStore = defineStore("alert", {
                 icon: "info",
                 text: message
             })
+        },
+
+        async confirm(message: string): Promise<boolean> {
+            const confirmation = await Swal.fire({
+                title: "Confirmação",
+                icon: "question",
+                text: message,
+                showCancelButton: true,
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não"
+            });
+            return confirmation.isConfirmed;
         }
     }
 })

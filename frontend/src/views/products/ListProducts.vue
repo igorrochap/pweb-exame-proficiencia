@@ -2,9 +2,11 @@
 import MovementDialog from '@/components/products/MovementDialog.vue';
 import ParentCard from '@/components/shared/ParentCard.vue';
 import productService from '@/services/products/product.service';
-import type { PaginatedProducts } from '@/types/products/Products';
+import type { PaginatedProducts, Product } from '@/types/products/Products';
 import { onMounted, ref, watch } from 'vue';
+import { useAlertStore } from '@/stores/alert.store';
 
+const alertStore = useAlertStore();
 const products = ref<PaginatedProducts>();
 const currentPage = ref<number>(1);
 const searchTerm = ref<string>('');
@@ -24,6 +26,16 @@ async function search() {
 
 async function fetchProducts() {
     products.value = await productService.fetchProducts(searchTerm.value, currentPage.value);
+}
+
+async function remove(product: Product, index: number) {
+    const confirmation = await alertStore.confirm('Tem certeza que deseja excluir este produto?');
+    if (!confirmation) {
+        return;
+    }
+    await productService.delete(product.uuid);
+    await alertStore.success('Produto excluído com sucesso!');
+    products.value?.data.splice(index, 1);
 }
 
 function formatPrice(price: number): string {
@@ -69,7 +81,7 @@ function formatPrice(price: number): string {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="product in products?.data" :key="product.uuid">
+                        <tr v-for="(product, index) in products?.data" :key="product.uuid">
                             <td class="text-center">{{ product.name }}</td>
                             <td class="text-center">{{ formatPrice(product.price) }}</td>
                             <td class="text-center">{{ product.quantity }}</td>
@@ -83,14 +95,21 @@ function formatPrice(price: number): string {
                                     <v-list>
                                         <v-list-item>
                                             <v-list-item-title>
-                                                <MovementDialog type="in" :product_id="product.uuid"/>
+                                                <MovementDialog type="in" :product_id="product.uuid" />
                                             </v-list-item-title>
                                             <v-list-item-title>
-                                                <MovementDialog type="out" :product_id="product.uuid"/>
+                                                <MovementDialog type="out" :product_id="product.uuid" />
                                             </v-list-item-title>
+                                            <v-list-item-title>
                                                 <v-btn variant="text" :to="`/products/update/${product.uuid}`">
                                                     <v-icon icon="mdi-pencil" />Editar
                                                 </v-btn>
+                                            </v-list-item-title>
+                                            <v-list-item-title>
+                                                <v-btn variant="text" @click="remove(product, index)">
+                                                    <v-icon icon="mdi-delete" />Excluir
+                                                </v-btn>
+                                            </v-list-item-title>
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>
