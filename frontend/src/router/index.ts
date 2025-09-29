@@ -6,6 +6,7 @@ import { useUserStore } from '@/stores/auth/user.store';
 import ListProducts from '@/views/products/ListProducts.vue';
 import NewProduct from '@/views/products/NewProduct.vue';
 import UpdateProduct from '@/views/products/UpdateProduct.vue';
+import Signup from '@/views/auth/Signup.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup,
     },
     {
       path: '/',

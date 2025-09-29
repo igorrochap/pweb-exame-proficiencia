@@ -1,5 +1,6 @@
 import type { Credentials } from "@/types/auth/Credentials";
 import http from "../http";
+import type { SignupInput } from "@/types/auth/Signup";
 
 export default {
     async login(payload: Credentials): Promise<void> {
@@ -13,5 +14,9 @@ export default {
 
     async logout(): Promise<void> { 
         await http.post('/logout');
+    },
+
+    async signup(payload: SignupInput) {
+        await http.post('/users', payload);
     }
 }

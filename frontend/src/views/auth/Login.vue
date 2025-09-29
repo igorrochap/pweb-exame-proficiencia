@@ -43,6 +43,10 @@ async function login() {
               <v-btn type="submit" color="primary">Login</v-btn>
             </v-card-actions>
           </v-form>
+          <v-card-text class="text-center pt-0">
+            <span>Não possui uma conta? </span>
+            <v-btn variant="text" color="primary" to="/signup" id="signup-link">Crie agora</v-btn>
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -52,5 +56,11 @@ async function login() {
 <style scoped>
 .fill-height {
   min-height: 100vh;
+}
+
+#signup-link {
+  text-transform:none;
+  min-width:unset;
+  padding:0 4px;
 }
 </style>
