@@ -9,4 +9,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/users', [UserController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware(ApiAuthentication::class)->get('categories', [CategoryController::class, 'index']);
+Route::middleware(ApiAuthentication::class)->group(function () {
+    Route::get('categories', [CategoryController::class, 'index']);
+    Route::prefix('auth')->controller(AuthController::class)->group(function () {
+        Route::get('/me', 'user');
+    });
+});

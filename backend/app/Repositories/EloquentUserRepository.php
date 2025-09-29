@@ -17,4 +17,9 @@ class EloquentUserRepository implements UserRepository
     {
         return User::query()->where('email', $email)->first();
     }
+
+    public function findByID(int $id): ?User
+    {
+        return User::query()->select(['uuid', 'name', 'email'])->find($id);
+    }
 }

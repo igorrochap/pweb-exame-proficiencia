@@ -10,4 +10,6 @@ interface UserRepository
     public function createFromDTO(CreateUserDTO $dto): User;
 
     public function findByEmail(string $email): ?User;
+
+    public function findByID(int $id): ?User;
 }

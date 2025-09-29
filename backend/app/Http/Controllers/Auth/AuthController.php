@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\Auth\Authenticate;
+use App\Contracts\Repositories\UserRepository;
+use App\Http\Controllers\Controller;
+use App\Support\JwtWrapper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthController
+class AuthController extends Controller
 {
     public function login(Request $request, Authenticate $action): JsonResponse
     {
@@ -27,5 +30,12 @@ class AuthController
             false,   // raw
             'Strict' // sameSite
         );
+    }
+
+    public function user(Request $request, UserRepository $userRepository): JsonResponse
+    {
+        $userID = JwtWrapper::getUserID($request->cookie('token'));
+        $loggedUser = $userRepository->findByID($userID);
+        return $this->success($loggedUser);
     }
 }
