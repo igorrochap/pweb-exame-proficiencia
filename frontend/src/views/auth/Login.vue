@@ -18,7 +18,7 @@ async function login() {
     await userStore.login(credentials);
     router.push('/');
   } catch (error) {
-    await alertStore.info(error.response.data.message || 'Erro ao efetuar login');
+    await alertStore.info(error.message || 'Erro ao efetuar login');
   }
 }
 </script>
