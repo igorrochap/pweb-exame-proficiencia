@@ -12,7 +12,7 @@ interface ProductRepository
 {
     public function createFromDTO(CreateProductDTO $dto): Product;
 
-    public function listByUser(int $userID, bool $paginated = false): Collection|LengthAwarePaginator;
+    public function listByUser(int $userID, ?string $name, bool $paginated = false): Collection|LengthAwarePaginator;
 
     public function findByUUID(string $uuid, int $userID): ?Product;
 

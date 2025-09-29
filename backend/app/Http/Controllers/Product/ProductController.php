@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function index(Request $request): JsonResponse
     {
         $userID = JwtWrapper::getUserID($request->cookie('token'));
-        $products = $this->repository->listByUser($userID, true);
+        $products = $this->repository->listByUser($userID, $request->string('name'), true);
 
         return $this->success($products);
     }

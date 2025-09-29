@@ -7,6 +7,7 @@ use App\DTO\Product\CreateProductDTO;
 use App\DTO\Product\UpdateProductDTO;
 use App\Models\Product\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class EloquentProductRepository implements ProductRepository
@@ -19,11 +20,12 @@ class EloquentProductRepository implements ProductRepository
         return $product;
     }
 
-    public function listByUser(int $userID, bool $paginated = false): Collection|LengthAwarePaginator
+    public function listByUser(int $userID, ?string $name, bool $paginated = false): Collection|LengthAwarePaginator
     {
         $query = Product::query()
             ->select(['uuid', 'name', 'price', 'quantity'])
-            ->where('user_id', $userID);
+            ->where('user_id', $userID)
+            ->when(!is_null($name), fn (Builder $query) => $query->where('name', 'ilike', "%{$name}%"));
         if ($paginated) {
             return $query->paginate();
         }
