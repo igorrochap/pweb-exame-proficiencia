@@ -1,0 +1,48 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: pweb_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - pweb_network
+    depends_on:
+      - db
+    command: sh ./start.sh
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: pweb_frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - pweb_network
+    volumes:
+      - ./frontend:/app
+    command: sh ./start.sh
+
+  db:
+    image: postgres:17.4-alpine
+    container_name: pweb_db
+    restart: always
+    environment:
+      POSTGRES_DB: pweb
+      POSTGRES_USER: pweb
+      POSTGRES_PASSWORD: pweb
+    networks:
+      - pweb_network
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local
+networks:
+  pweb_network:
+    driver: bridge
