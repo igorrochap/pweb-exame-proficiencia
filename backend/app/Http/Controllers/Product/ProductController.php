@@ -60,6 +60,7 @@ class ProductController extends Controller
     {
         $userID = JwtWrapper::getUserID($request->cookie('token'));
         $this->repository->deleteByUUID($uuid, $userID);
+
         return $this->noContent();
     }
 }

@@ -36,6 +36,7 @@ class AuthController extends Controller
     {
         $userID = JwtWrapper::getUserID($request->cookie('token'));
         $loggedUser = $userRepository->findByID($userID);
+
         return $this->success($loggedUser);
     }
 

@@ -21,4 +21,6 @@ interface ProductRepository
     public function updateQuantity(Product $product, int $quantity): void;
 
     public function deleteByUuid(string $uuid, int $userID): void;
+
+    public function totalAmountPerCategory(int $userID): Collection;
 }
