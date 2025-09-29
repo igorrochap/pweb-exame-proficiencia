@@ -18,7 +18,6 @@ watch(currentPage, async () => {
 });
 
 async function search() {
-    console.log('Searching for:', searchTerm.value);
     currentPage.value = 1;
     await fetchProducts();
 }
@@ -89,6 +88,9 @@ function formatPrice(price: number): string {
                                             <v-list-item-title>
                                                 <MovementDialog type="out" :product_id="product.uuid"/>
                                             </v-list-item-title>
+                                                <v-btn variant="text" :to="`/products/update/${product.uuid}`">
+                                                    <v-icon icon="mdi-pencil" />Editar
+                                                </v-btn>
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>

@@ -16,5 +16,15 @@ export default {
     async createMovement(movement: MovementInput): Promise<Response> {
         const { data } = await http.post(`/products/${movement.product_id}/movement`, movement);
         return data;
+    },
+
+    async findById(id: string): Promise<Product> {
+        const { data } = await http.get<Product>(`/products/${id}`);
+        return data;
+    },
+
+    async update(id: string, product: ProductInput): Promise<Product> {
+        const { data } = await http.put<Product>(`/products/${id}`, product);
+        return data;
     }
 }
