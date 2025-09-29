@@ -57,4 +57,9 @@ class EloquentProductRepository implements ProductRepository
     {
         $product->update(['quantity' => $quantity]);
     }
+
+    public function deleteByUuid(string $uuid, int $userID): void
+    {
+        Product::query()->where('uuid', $uuid)->where('user_id', $userID)->delete();
+    }
 }

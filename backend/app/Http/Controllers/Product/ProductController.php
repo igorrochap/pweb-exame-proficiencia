@@ -55,4 +55,11 @@ class ProductController extends Controller
 
         return $this->success($product);
     }
+
+    public function delete(string $uuid, Request $request): JsonResponse
+    {
+        $userID = JwtWrapper::getUserID($request->cookie('token'));
+        $this->repository->deleteByUUID($uuid, $userID);
+        return $this->noContent();
+    }
 }

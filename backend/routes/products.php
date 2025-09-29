@@ -11,4 +11,5 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('', 'index');
     Route::get('{uuid}', 'show');
     Route::put('{uuid}', 'update');
+    Route::delete('{uuid}', 'delete');
 });
