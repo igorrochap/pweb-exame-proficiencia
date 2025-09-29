@@ -3,6 +3,7 @@ import Login from '@/views/auth/Login.vue'
 import Layout from '@/layouts/Layout.vue'
 import Home from '@/views/Home.vue'
 import { useUserStore } from '@/stores/auth/user.store';
+import ListProducts from '@/views/products/ListProducts.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
           path: '',
           name: 'home',
           component: Home,
+        },
+        {
+          path: 'products',
+          name: 'products',
+          component: ListProducts
         }
       ],
       meta: { requiresAuth: true }

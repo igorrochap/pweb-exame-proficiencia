@@ -16,10 +16,11 @@ function logout() {
   <v-app>
     <v-app-bar app color="primary" dark>
       <v-toolbar-title>
-        <v-btn text to="/products">Products</v-btn>
+        <v-btn text to="/" exact class="mr-2">Home</v-btn>
+        <v-btn text to="/products" class="mr-2">Produtos</v-btn>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-menu offset-y>
+      <v-menu offset-y v-if="userStore.user">
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props">
             <v-avatar color="secondary">
@@ -49,3 +50,10 @@ function logout() {
     </v-main>
   </v-app>
 </template>
+
+<style scoped>
+.v-btn.v-btn--active {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+</style>
+

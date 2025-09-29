@@ -7,4 +7,10 @@ import * as directives from "vuetify/directives";
 export default createVuetify({
   components,
   directives,
+  defaults: {
+    VTextField: {
+      variant: 'outlined',
+      color: 'primary',
+    }
+  }
 });
