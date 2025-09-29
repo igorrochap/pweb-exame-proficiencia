@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ParentCard from '@/components/shared/ParentCard.vue';
 import productService from '@/services/products/product.service';
-import type { PaginatedProducts } from '@/types/Products';
+import type { PaginatedProducts } from '@/types/products/Products';
 import { onMounted, ref, watch } from 'vue';
 
 const products = ref<PaginatedProducts>();

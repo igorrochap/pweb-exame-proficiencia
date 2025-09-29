@@ -11,6 +11,15 @@ export default createVuetify({
     VTextField: {
       variant: 'outlined',
       color: 'primary',
+    },
+    VNumberInput: {
+      variant: 'outlined',
+      color: 'primary',
+    },
+    VAutocomplete: {
+      variant: 'outlined',
+      color: 'primary',
+      noDataText: 'Sem resultados encontrados',
     }
   }
 });
