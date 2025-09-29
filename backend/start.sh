@@ -6,7 +6,7 @@ if [ ! -d ./vendor ]; then
     cp .env.docker .env
     php artisan key:generate
     php artisan jwt:key
-    php artisan migrate --seed
+    php artisan migrate --seed --force
 fi
 
 php artisan serve --host=0.0.0.0 --port=8000

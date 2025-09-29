@@ -1,8 +1,7 @@
-#!/bin/sh
-set -e
+#!/bin/bash
 
 if [ ! -d ./node_modules ]; then
-    npm install
+	npm install
 fi
 
 npm run dev --host
