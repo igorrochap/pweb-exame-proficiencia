@@ -25,7 +25,8 @@ class EloquentProductRepository implements ProductRepository
         $query = Product::query()
             ->select(['uuid', 'name', 'price', 'quantity'])
             ->where('user_id', $userID)
-            ->when(!is_null($name), fn (Builder $query) => $query->where('name', 'ilike', "%{$name}%"));
+            ->when(!is_null($name), fn (Builder $query) => $query->where('name', 'ilike', "%{$name}%"))
+            ->orderBy('name');
         if ($paginated) {
             return $query->paginate();
         }
